@@ -1,0 +1,704 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "title": "JavaScript Was Created in 10 Days",
+      "content": "Did you know? In May 1995, Brendan Eich was hired by Netscape and told to create a new programming language before the Navigator 2.0 beta shipped. He delivered a working prototype in roughly 10 days. Under the hood, he smuggled in ideas from Scheme and Self (his favorite languages) while wrapping them in Java-like syntax to please management. (Source: https://thenewstack.io/brendan-eich-on-creating-javascript-in-10-days-and-what-hed-do-differently-today/)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 2,
+      "title": "JavaScript's Name Is a Marketing Trick",
+      "content": "Did you know? JavaScript has nothing to do with Java. It was originally called Mocha, then LiveScript. In December 1995, Netscape and Sun Microsystems renamed it 'JavaScript' purely to ride the Java hype wave. Brendan Eich has called this 'a big fat marketing scam.' The confusion has haunted developers for 30 years. (Source: https://en.wikipedia.org/wiki/JavaScript)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 3,
+      "title": "typeof null Is a 30-Year-Old Unfixable Bug",
+      "content": "Did you know? In the original JavaScript engine, values were stored with a type tag. Objects had tag 000, and null was the null pointer (all zeros). So typeof null accidentally returns 'object' instead of 'null'. A fix was proposed for ES6 but rejected — it would break too much existing code. It will stay broken forever. (Source: https://2ality.com/2013/10/typeof-null.html)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 4,
+      "title": "You Can Spell 'banana' With JavaScript Type Coercion",
+      "content": "Did you know? The expression (\"b\" + \"a\" + + \"a\" + \"a\").toLowerCase() outputs 'banana'. Here's why: the unary + tries to convert 'a' to a number, producing NaN. String concatenation gives 'baNaN', add 'a' to get 'baNaNa', then toLowerCase() gives 'banana'. (Source: https://github.com/denysdovhan/wtfjs)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 5,
+      "title": "0.1 + 0.2 Does Not Equal 0.3",
+      "content": "Did you know? In JavaScript, 0.1 + 0.2 evaluates to 0.30000000000000004. This isn't a JS bug — it's IEEE 754 floating-point arithmetic, used by nearly all languages. But JavaScript's lack of a separate integer type makes it particularly visible and surprising for newcomers. (Source: https://github.com/denysdovhan/wtfjs)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 6,
+      "title": "The WAT Talk That Went Viral",
+      "content": "Did you know? At CodeMash 2012, Gary Bernhardt delivered a 4-minute lightning talk called 'Wat' that exposed JavaScript's bizarre type coercion: [] + [] === '' and [] + {} === '[object Object]'. The talk went viral and remains one of the most-watched programming conference talks in history. (Source: https://www.destroyallsoftware.com/talks/wat)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 7,
+      "title": "ES6 Was the Biggest JavaScript Update in 16 Years",
+      "content": "Did you know? ECMAScript 2015 (ES6) added arrow functions, let/const, classes, template literals, destructuring, promises, and modules — all in a single release. The previous major update (ES3) was in 1999. ES4 was so ambitious it was abandoned entirely after years of committee deadlock. (Source: https://en.wikipedia.org/wiki/ECMAScript_version_history)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 8,
+      "title": "JavaScript Runs on 98.9% of All Websites",
+      "content": "Did you know? As of 2025, JavaScript is used on 98.9% of all websites as a client-side language, according to W3Techs. No other programming language comes close to that level of web dominance. (Source: https://w3techs.com/technologies/details/cp-javascript)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 9,
+      "title": "TypeScript Overtook Python on GitHub in 2025",
+      "content": "Did you know? In 2025, TypeScript became the most-used language on GitHub, overtaking both JavaScript and Python. Over 1 million developers contributed TypeScript code — a 66% jump in one year. The language was created by Anders Hejlsberg, who also created C# and Turbo Pascal. (Source: https://github.blog/developer-skills/programming-languages-and-frameworks/typescripts-rise-in-the-ai-era-insights-from-lead-architect-anders-hejlsberg/)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 10,
+      "title": "TypeScript Exists Because JavaScript 'Didn't Scale'",
+      "content": "Did you know? Anders Hejlsberg started TypeScript in 2012 because JavaScript couldn't handle large multi-developer codebases. The key strategic decision: any valid JavaScript is valid TypeScript, so teams could migrate incrementally. Today, 40% of JS ecosystem developers write exclusively in TypeScript. (Source: https://github.blog/developer-skills/programming-languages-and-frameworks/7-learnings-from-anders-hejlsberg-the-architect-behind-c-and-typescript/)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 11,
+      "title": "JavaScript Was Almost Called 'Mocha'",
+      "content": "Did you know? JavaScript went through three names: Mocha (Brendan Eich's original name), LiveScript (for the Navigator 2.0 beta in September 1995), and finally JavaScript (December 1995). The 'Java' prefix was a last-minute marketing decision that Eich never wanted. (Source: https://en.wikipedia.org/wiki/JavaScript)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 12,
+      "title": "The Array.sort() Default Sorts Alphabetically, Not Numerically",
+      "content": "Did you know? [10, 9, 8, 1, 2, 3].sort() returns [1, 10, 2, 3, 8, 9] in JavaScript. By default, sort() converts elements to strings and compares them lexicographically. You need .sort((a, b) => a - b) for numeric sorting. This has tripped up developers for decades. (Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 13,
+      "title": "NaN Is Not Equal to Itself",
+      "content": "Did you know? In JavaScript, NaN === NaN returns false. NaN is the only value in the language that is not equal to itself. To check if something is NaN, you need to use Number.isNaN() or the quirky fact that it's the only value where x !== x is true. (Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 14,
+      "title": "JSON Was 'Discovered', Not Invented",
+      "content": "Did you know? Douglas Crockford, who popularized JSON, says he 'discovered' it rather than invented it. The JavaScript object literal syntax had existed since 1999 — Crockford simply gave it a name, a spec, and a website (json.org) in 2002. JSON went on to replace XML as the dominant data interchange format. (Source: https://en.wikipedia.org/wiki/JSON)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 15,
+      "title": "'use strict' Was Added Because JS Couldn't Break Old Code",
+      "content": "Did you know? When JavaScript needed to fix bad language design decisions (like implicit globals and silent errors), it couldn't just change the rules — that would break millions of websites. The solution: an opt-in 'use strict' directive that enables stricter parsing. It was introduced in ES5 (2009). (Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 16,
+      "title": "CSS Was Proposed by a Man at CERN in 1994",
+      "content": "Did you know? Hakon Wium Lie proposed CSS in October 1994 while working at CERN with Tim Berners-Lee. Nine competing stylesheet proposals were submitted. What made Lie's proposal win was the 'cascading' concept: the idea that author, user, and browser stylesheets could combine with different priorities. (Source: https://www.w3.org/Style/CSS20/history.html)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 17,
+      "title": "The Web Had No Way to Style Text for 5 Years",
+      "content": "Did you know? From 1991 (the first website) until 1996 (CSS1), the web had no proper styling mechanism. Everything was plain HTML formatting — bold, italic, headings, and that's about it. CSS1 became a W3C Recommendation on December 17, 1996, five years after the web launched. (Source: https://www.w3.org/Style/CSS20/history.html)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 18,
+      "title": "The IE6 Box Model Bug Haunted CSS for a Decade",
+      "content": "Did you know? Internet Explorer 6 implemented the CSS box model wrong — it included padding and border inside the specified width. With IE6 at 90%+ market share and no updates for 5 years, developers invented wild CSS hacks to work around it, like the 'voice-family' hack and the underscore hack (_width). (Source: https://en.wikipedia.org/wiki/Internet_Explorer_box_model_bug)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 19,
+      "title": "Ironically, IE6's 'Wrong' Box Model Won in the End",
+      "content": "Did you know? IE6's box model (padding inside the width) was considered a bug for years. But developers kept saying it was actually more intuitive. In CSS3, the W3C agreed — they introduced box-sizing: border-box, which does exactly what IE6 did. Today it's the recommended default for all elements. (Source: https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 20,
+      "title": "CSS Zen Garden Changed How the World Saw CSS",
+      "content": "Did you know? In May 2003, Dave Shea launched CSS Zen Garden: a single HTML file restyled by hundreds of CSS submissions from 30+ countries. It visually proved CSS could produce wildly different, beautiful designs without changing the markup. It convinced an entire generation of skeptics to abandon table-based layouts. (Source: https://en.wikipedia.org/wiki/CSS_Zen_Garden)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 21,
+      "title": "Designers Once Made GIF Images Just for Custom Text",
+      "content": "Did you know? Before @font-face and Google Fonts, web designers who wanted custom typography had to render text as GIF images — creating individual image files for headings and titles. This was considered a standard technique in the early 2000s, which sounds absurd by today's standards. (Source: https://thehistoryoftheweb.com/the-rise-of-css/)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 22,
+      "title": "The Blink Tag Was Born as a Bar Joke",
+      "content": "Did you know? One night in 1994, Netscape engineer Lou Montulli joked in a Mountain View bar that the fanciest thing a text browser could do was blink text. A colleague went back to the office and actually implemented it overnight. Montulli expected nobody would use it. Instead, the entire early web started blinking. The tag never made it into the HTML standard and was eventually removed from all browsers. (Source: https://gizmodo.com/the-humble-origins-of-the-html-blink-tag-5903827)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 23,
+      "title": "Sans-Serif Fonts Won the Web Because of Terrible Screens",
+      "content": "Did you know? In the 1990s, monitors were blurry 14-inch CRTs at ~60 PPI. Serif fonts' fine details became muddy blobs at that resolution, so sans-serif fonts like Verdana won. The word 'sans-serif' was originally pejorative — early ones were called 'grotesque' fonts. Today's 220+ PPI screens make serifs legible again, but the convention stuck. (Source: https://www.nngroup.com/articles/serif-vs-sans-serif-fonts-hd-screens/)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 24,
+      "title": "Retina Displays Broke the '1 Pixel = 1 Pixel' Assumption",
+      "content": "Did you know? When Apple introduced Retina displays, one CSS pixel suddenly mapped to four physical pixels. Every web image that looked fine before appeared blurry on new devices. This forced the industry to adopt SVGs, @2x assets, and icon fonts. The CSS pixel was designed to be device-independent, but it took Retina to make that abstraction matter. (Source: https://www.sitepoint.com/css-techniques-for-retina-displays/)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 25,
+      "title": "'Responsive Web Design' Was Coined in a Single Article",
+      "content": "Did you know? Ethan Marcotte coined the term 'responsive web design' in a May 2010 article for A List Apart. He defined three ingredients: fluid grids, flexible images, and media queries. Before this, designers made entirely separate 'mobile sites' (m.example.com). Marcotte's idea unified them into one site that adapts. (Source: https://ethanmarcotte.com/wrote/responsive-design-at-10/)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 26,
+      "title": "Over 60% of Web Traffic Comes From Phones",
+      "content": "Did you know? More than 60% of web traffic now comes from mobile devices. That means if your site doesn't work well on a phone, the majority of your users are having a bad experience. This is why responsive design is not a nice-to-have — it's essential. (Source: https://www.vrinsofts.com/web-development-statistics/)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 27,
+      "title": "The :visited Selector Is Deliberately Broken for Security",
+      "content": "Did you know? Browsers intentionally limit what CSS can do with :visited links. In 2010, researchers showed that a malicious page could detect which sites you'd visited by checking computed styles on :visited links. Browsers now lie to JavaScript about :visited styles and restrict it to color changes only. (Source: https://developer.mozilla.org/en-US/docs/Web/CSS/:visited)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 28,
+      "title": "React Was Born From Facebook's Broken Chat Notifications",
+      "content": "Did you know? The problem that led to React: Facebook's chat showed different unread message counts in the top bar, the side panel, and the chat box. You'd see '1 unread message,' click it, and everything was already read. This synchronization nightmare — keeping multiple views of the same data in sync — became the core problem React was designed to solve. (Source: https://cult.honeypot.io/reads/react-js-the-documentary-how-it-all-began/)",
+      "author": "React History",
+      "author_email": "react@webfacts.dev"
+    },
+    {
+      "id": 29,
+      "title": "React's Creator Was 'Terrified' to Change Facebook's Code",
+      "content": "Did you know? Jordan Walke, who created React at Facebook's ads team, described making code changes as 'terrifying — like potentially losing a day of revenue because you missed a semicolon.' He built React on nights and weekends as a way to make UI development less scary. (Source: https://cult.honeypot.io/reads/react-js-the-documentary-how-it-all-began/)",
+      "author": "React History",
+      "author_email": "react@webfacts.dev"
+    },
+    {
+      "id": 30,
+      "title": "React Was Open-Sourced to Boos",
+      "content": "Did you know? When React was first presented at JSConf US in May 2013, the audience reaction was skeptical — many developers thought mixing HTML-like syntax (JSX) inside JavaScript was a terrible idea. It went against the established wisdom of 'separation of concerns.' React's popularity grew slowly, mostly through word of mouth from teams who tried it. (Source: https://en.wikipedia.org/wiki/React_(software))",
+      "author": "React History",
+      "author_email": "react@webfacts.dev"
+    },
+    {
+      "id": 31,
+      "title": "React's License Almost Killed It",
+      "content": "Did you know? React was originally released under a 'BSD + Patents' license that terminated your right to use React if you ever sued Facebook for anything patent-related. The Apache Foundation banned React in all Apache projects. After massive community backlash, Facebook relicensed React under MIT in September 2017. (Source: https://en.wikipedia.org/wiki/React_(software))",
+      "author": "React History",
+      "author_email": "react@webfacts.dev"
+    },
+    {
+      "id": 32,
+      "title": "Facebook (3 Billion Users) Runs on React",
+      "content": "Did you know? Facebook itself is the largest React application in the world, serving over 3 billion users. Other major React-powered sites include Netflix, The New York Times, Instagram, Reddit, Airbnb, and GitHub. (Source: https://www.zenesys.com/10-most-popular-websites-built-using-reactjs-library)",
+      "author": "React History",
+      "author_email": "react@webfacts.dev"
+    },
+    {
+      "id": 33,
+      "title": "React's Virtual DOM Idea Came From Video Game Rendering",
+      "content": "Did you know? React's approach of re-rendering everything and then diffing the result was inspired by game rendering: games redraw the entire screen 60 times per second and only update what changed. Before React, web UIs tried to surgically update tiny DOM pieces — which was fast but bug-prone and terrifying to maintain. (Source: https://react.dev/learn/preserving-and-resetting-state)",
+      "author": "React History",
+      "author_email": "react@webfacts.dev"
+    },
+    {
+      "id": 34,
+      "title": "Instagram Was React's First Real Test",
+      "content": "Did you know? Instagram (acquired by Facebook in 2012) was the first full production application rebuilt with React. When the Instagram team bet their product on this untested library and it worked beautifully, it gave Facebook's leadership the confidence to open-source React in 2013. (Source: https://cult.honeypot.io/reads/react-js-the-documentary-how-it-all-began/)",
+      "author": "React History",
+      "author_email": "react@webfacts.dev"
+    },
+    {
+      "id": 35,
+      "title": "React Hooks Were Announced With a 'No Breaking Changes' Promise",
+      "content": "Did you know? When Dan Abramov introduced Hooks at React Conf 2018, the React team promised no breaking changes — class components would keep working forever. Hooks (useState, useEffect, etc.) were purely additive. This 'never break existing code' philosophy is central to React's design. (Source: https://react.dev/blog/2023/03/16/introducing-react-dev)",
+      "author": "React History",
+      "author_email": "react@webfacts.dev"
+    },
+    {
+      "id": 36,
+      "title": "The First Website Is Still Online",
+      "content": "Did you know? Tim Berners-Lee published the first-ever website on August 6, 1991, at CERN. It described what the World Wide Web is and how to use it. CERN restored the original URL in 2013, and you can still visit it today at http://info.cern.ch — a plain text page with hyperlinks, exactly as the internet began. (Source: https://home.cern/science/computing/birth-web)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 37,
+      "title": "The First Web Photo Was of a Parody Girl Band",
+      "content": "Did you know? The first photo ever uploaded to the web (July 18, 1992) was of Les Horribles Cernettes — an all-female parody pop group of CERN employees who sang songs about particle physics. Tim Berners-Lee needed to test if the web could handle images, so he asked a colleague to scan a backstage photo. (Source: https://en.wikipedia.org/wiki/Les_Horribles_Cernettes)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 38,
+      "title": "HTTP/0.9 Had Only One Method: GET",
+      "content": "Did you know? The original HTTP (version 0.9, from 1991) supported exactly one method: GET. There were no headers, no status codes, and no content types. The only possible response was an HTML document. POST, PUT, and DELETE came later with HTTP/1.0 in 1996. (Source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Evolution_of_HTTP)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 39,
+      "title": "The Room 404 Story Is a Myth",
+      "content": "Did you know? A popular legend claims HTTP's 404 error comes from Room 404 at CERN, where the first servers were stored. It's completely false — CERN's numbering doesn't work that way. Robert Cailliau, co-developer of the Web, called this myth 'hogwash.' The 404 code was simply part of the HTTP status code scheme. (Source: https://earth.hoyd.net/posts/was-the-404-not-found-based-on-a-room-at-cern-or-not/)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 40,
+      "title": "HTTPS Was Invented by Netscape in 1994",
+      "content": "Did you know? HTTPS was introduced by Netscape Communications in 1994 for their browser Netscape Navigator. It used SSL (Secure Sockets Layer) to encrypt web traffic. The first version (SSL 1.0) was never released because it had serious security flaws — the public only ever saw SSL 2.0 and later. (Source: https://en.wikipedia.org/wiki/HTTPS)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 41,
+      "title": "Let's Encrypt Made HTTPS Free for Everyone",
+      "content": "Did you know? Before Let's Encrypt (founded 2014 by EFF, Mozilla, and others), SSL certificates cost hundreds of dollars per year. Let's Encrypt made them free and automatic. By 2020 they'd issued their billionth certificate. As of late 2025, they issue ten million certificates per day — more than all other certificate authorities combined. (Source: https://en.wikipedia.org/wiki/Let%27s_Encrypt)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 42,
+      "title": "The First .com Domain Was Registered in 1985",
+      "content": "Did you know? The first .com domain — symbolics.com — was registered on March 15, 1985, by Symbolics Inc., a computer manufacturer. Before DNS was created in 1983, all internet host names were in a single HOSTS.TXT file manually maintained by one person at SRI International. (Source: https://en.wikipedia.org/wiki/Domain_Name_System)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 43,
+      "title": "The Internet Switched to TCP/IP on a Single 'Flag Day'",
+      "content": "Did you know? On January 1, 1983, the entire ARPANET switched from NCP to TCP/IP in a single coordinated cutover — 'flag day.' Vint Cerf and Bob Kahn, who designed TCP/IP, distributed buttons that read 'I survived the TCP/IP transition.' This date is sometimes called the birthday of the internet. (Source: https://en.wikipedia.org/wiki/Internet_protocol_suite)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 44,
+      "title": "The First Thing Ever Sold Online Was a Sting CD",
+      "content": "Did you know? On August 11, 1994, 21-year-old Dan Kohn sold a Sting CD for $12.48 via his website NetMarket, using encryption to protect the credit card. This beat Pizza Hut's online pizza ordering by three days — and Pizza Hut required cash on delivery anyway, so it wasn't true e-commerce. (Source: https://www.fastcompany.com/3054025/youll-never-guess-what-the-first-thing-ever-sold-on-the-internet-was)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 45,
+      "title": "The Internet Weighs About as Much as a Strawberry",
+      "content": "Did you know? Physicist Russell Seitz calculated that all the electrons carrying all the information on the internet weigh roughly 50 grams — about the weight of one strawberry. A typical email is stored using about 8 billion electrons, which weigh 'two ten-thousandths of a quadrillionth of an ounce.' (Source: https://www.npr.org/sections/krulwich/2011/12/21/144066248/lets-weigh-the-internet-or-maybe-lets-not)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 46,
+      "title": "The Samy Worm: 1 Million Friends in 20 Hours",
+      "content": "Did you know? In October 2005, 19-year-old Samy Kamkar wrote an XSS worm on MySpace that added 'but most of all, samy is my hero' to profiles and sent him friend requests. In 20 hours, over one million users were infected — the fastest-spreading virus in history. MySpace had to take the entire site offline. (Source: https://en.wikipedia.org/wiki/Samy_(computer_worm))",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 47,
+      "title": "Samy Kamkar Was Banned From Computers for 3 Years",
+      "content": "Did you know? After the Samy worm, Kamkar was raided by the Secret Service, had his computers confiscated, pled guilty to a felony, received 3 years' probation, 720 hours of community service, and was banned from using computers for 3 years. He's now a respected security researcher. (Source: https://en.wikipedia.org/wiki/Samy_(computer_worm))",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 48,
+      "title": "80-90% of Websites Were Vulnerable to XSS in 2005",
+      "content": "Did you know? When the Samy worm hit in 2005, researchers estimated 80-90% of websites were vulnerable to cross-site scripting (XSS). The incident was a massive wake-up call that fundamentally changed how the industry approached web application security. (Source: https://www.vice.com/en/article/the-myspace-worm-that-changed-the-internet-forever/)",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 49,
+      "title": "Bobby Tables: An XKCD Comic That Became a Movement",
+      "content": "Did you know? XKCD comic #327 features a mom whose son is named \"Robert'); DROP TABLE Students;--\". The SQL injection joke became so famous it inspired bobby-tables.com — a real guide for preventing SQL injection. A Polish company even registered the actual SQL injection as its legal name. (Source: https://xkcd.com/327/)",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 50,
+      "title": "Facebook Warns You When You Open DevTools",
+      "content": "Did you know? Open the browser console on Facebook.com and you'll see a big red 'Stop!' warning. This combats 'Self-XSS' — a scam where attackers trick users into pasting malicious JavaScript into the console, claiming it will let them 'hack' someone's account. The pasted code actually steals the victim's own session. (Source: https://en.wikipedia.org/wiki/Self-XSS)",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 51,
+      "title": "The left-pad Incident: 11 Lines Broke the Internet",
+      "content": "Did you know? On March 22, 2016, developer Azer Koculu unpublished 273 npm packages after a naming dispute with Kik Messenger. One package — left-pad, just 11 lines — was a dependency of Babel, React, and thousands of projects. Facebook, Netflix, Spotify all broke. npm had to restore it and change their unpublishing rules. (Source: https://en.wikipedia.org/wiki/Npm_left-pad_incident)",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 52,
+      "title": "The npm 'everything' Package Nearly Broke the Registry",
+      "content": "Did you know? In 2024, an npm user uploaded a package called 'everything' that depended on every public npm package. Worse: npm's policy prevents unpublishing packages others depend on, so 'everything' depended on everyone's packages and nobody could delete theirs. A beautiful catch-22. (Source: https://socket.dev/blog/when-everything-becomes-too-much)",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 53,
+      "title": "npm Gets 450,000+ Malicious Packages Per Year",
+      "content": "Did you know? In 2025, attackers published over 450,000 malicious packages on npm in a single year. The registry has 3+ million packages total, with 18 billion installs per month. Every week, roughly 160 people publish their very first package — and not all of them have good intentions. (Source: https://socket.dev/blog/2023-npm-retrospective)",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 54,
+      "title": "The :visited CSS Hack Could Reveal Your Browsing History",
+      "content": "Did you know? In 2010, researchers showed that a malicious website could detect which other sites you'd visited by styling :visited links differently and reading the computed styles with JavaScript. Browsers now deliberately lie to JavaScript about :visited styles to protect privacy. (Source: https://developer.mozilla.org/en-US/docs/Web/CSS/:visited)",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 55,
+      "title": "The Konami Code Works on Real Websites",
+      "content": "Did you know? The classic game cheat code (Up Up Down Down Left Right Left Right B A) is hidden on many major sites. Reddit makes a bacon star fly across the screen. The Bank of Canada plays a chiptune 'O Canada' with falling banknotes. Discord's 404 page unlocks a Snake game. (Source: https://en.wikipedia.org/wiki/Konami_Code)",
+      "author": "Web Security",
+      "author_email": "security@webfacts.dev"
+    },
+    {
+      "id": 56,
+      "title": "IE Peaked at 95% Market Share, Then Died",
+      "content": "Did you know? Internet Explorer reached 95% browser market share in 2003, crushing Netscape. Microsoft then stopped updating it for 5 years, allowing Firefox (2004) and Chrome (2008) to rise. Chrome overtook IE by 2012. IE was officially discontinued in 2022. (Source: https://en.wikipedia.org/wiki/Browser_wars)",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 57,
+      "title": "Chrome Was Announced With a Comic Book",
+      "content": "Did you know? Google announced Chrome on September 1, 2008 by releasing a 38-page comic book illustrated by Scott McCloud (author of 'Understanding Comics'). It explained Chrome's multi-process architecture, V8 JavaScript engine, and security model through cartoon drawings. (Source: https://en.wikipedia.org/wiki/Google_Chrome)",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 58,
+      "title": "Mosaic: The Browser That Made the Web Visual",
+      "content": "Did you know? Before Mosaic (1993), web browsers were text-only or displayed images in separate windows. Mosaic was the first browser to show images inline with text on the same page. Its creator, Marc Andreessen, went on to co-found Netscape — and is now a billionaire venture capitalist. (Source: https://en.wikipedia.org/wiki/Mosaic_(web_browser))",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 59,
+      "title": "Chrome's V8 Engine Changed What JavaScript Could Do",
+      "content": "Did you know? Before Chrome's V8 engine (2008), JavaScript was considered too slow for serious applications. V8 compiled JavaScript directly to machine code instead of interpreting it, making it dramatically faster. This speed boost enabled Node.js (2009), which brought JavaScript to the server side. (Source: https://en.wikipedia.org/wiki/V8_(JavaScript_engine))",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 60,
+      "title": "Chrome's Dinosaur Game Has 270 Million Players",
+      "content": "Did you know? When you lose internet in Chrome, pressing spacebar starts a hidden T-Rex runner game. Created in 2014, it's codenamed 'Project Bolan' (after Marc Bolan of T. Rex). About 270 million games are played monthly. The max score references how long T. Rex existed before extinction. (Source: https://en.wikipedia.org/wiki/Dinosaur_Game)",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 61,
+      "title": "Firefox Has a Secret 'Book of Mozilla'",
+      "content": "Did you know? Type about:mozilla in Firefox and you'll see dramatic, apocalyptic quotes from the fictional 'Book of Mozilla' — written in biblical style about the rise, fall, and rebirth of Netscape/Mozilla, portraying Firefox as a phoenix rising from flames. (Source: https://en.wikipedia.org/wiki/The_Book_of_Mozilla)",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 62,
+      "title": "Google Search 'do a barrel roll' and Watch the Page Spin",
+      "content": "Did you know? Google has dozens of interactive Easter eggs. Search 'do a barrel roll' and the page spins 360 degrees. Search 'Pac-Man' or 'Snake' to play games. Search 'google in 1998' to see the original design. Search 'askew' and the whole page tilts. (Source: https://en.wikipedia.org/wiki/List_of_Google_Easter_eggs)",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 63,
+      "title": "The Space Jam Website Has Run Since 1996",
+      "content": "Did you know? The 1996 Space Jam movie's website is still online at spacejam.com/1996/, completely untouched — starfield backgrounds, image maps, and all. When the 2021 sequel launched, Warner Bros. built the new site at the root domain and preserved the original. It's a living museum of 90s web design. (Source: https://www.spacejam.com/1996/)",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 64,
+      "title": "Python Has a Hidden 'import antigravity' Easter Egg",
+      "content": "Did you know? Type 'import antigravity' in Python and it opens an XKCD comic. Type 'import this' to see the Zen of Python. Try 'from __future__ import braces' and you get: SyntaxError: not a chance. Programming languages love their Easter eggs. (Source: https://en.wikipedia.org/wiki/Python_(programming_language)#Easter_eggs)",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 65,
+      "title": "Chrome DevTools Has a Hidden Design Mode",
+      "content": "Did you know? Chrome DevTools has features most developers never discover: Design Mode lets you edit any text on any page live. CSS Overview audits a site's colors and fonts. Logpoints add console.log without modifying code. The Code Coverage tool shows what % of CSS and JS is actually used. (Source: https://developer.chrome.com/docs/devtools/)",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 66,
+      "title": "The $300 Million Button",
+      "content": "Did you know? A major e-commerce site forced users to register before checkout. UX researcher Jared Spool found 45% of customers had multiple accounts, and 160,000 people requested password resets daily — 75% never completed their purchase. The fix: replace 'Register' with 'Continue'. Sales jumped $300 million in the first year. (Source: https://articles.centercentre.com/three_hund_million_button/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 67,
+      "title": "Google's 'I'm Feeling Lucky' Costs $110 Million Per Year",
+      "content": "Did you know? Only ~1% of searches use Google's 'I'm Feeling Lucky' button, which skips the results page (and all ads). Estimated cost: $110 million per year in lost ad revenue. Google keeps it because, as Marissa Mayer explained, it makes the company feel less corporate. (Source: https://browsermedia.agency/blog/im-feeling-lucky-button-costs-google-110m-a-year/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 68,
+      "title": "Users Read Web Pages in an F-Shape",
+      "content": "Did you know? Nielsen Norman Group's eye-tracking study of 232 users found a consistent F-shaped reading pattern: people read across the top, scan partway across a second line, then scan down the left side. Important content should be front-loaded in the first two paragraphs. (Source: https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 69,
+      "title": "You Only Need 5 Users to Find Most Usability Problems",
+      "content": "Did you know? Nielsen Norman Group's research shows that testing with just 5 users uncovers about 85% of a design's usability issues. Despite this, the average company uses 11 test participants — more than twice what's needed. (Source: https://www.nngroup.com/articles/how-many-test-users/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 70,
+      "title": "The Hamburger Menu Was Designed in 1981",
+      "content": "Did you know? The three-line hamburger icon was created by Norm Cox for the Xerox Star computer in 1981, with only 16x16 pixels to work with. It lay dormant for 30 years until mobile apps revived it around 2009. Cox had no idea people were calling it 'the hamburger' until recently. (Source: https://en.wikipedia.org/wiki/Hamburger_button)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 71,
+      "title": "The Favicon Was a Late-Night Hack",
+      "content": "Did you know? Microsoft developer Bharat Shyam created the favicon while working late on IE5's 'favorites' feature. He called over a junior PM for approval, shipped it with IE5 in 1999, and the convention of dropping a 16x16 favicon.ico in your root directory has stuck ever since. (Source: https://thehistoryoftheweb.com/how-we-got-the-favicon/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 72,
+      "title": "Lorem Ipsum Is Scrambled Cicero from 45 BC",
+      "content": "Did you know? Lorem Ipsum comes from a scrambled page of 'De Finibus Bonorum et Malorum' by Cicero, written in 45 BC. A medieval typesetter garbled it into nonsense Latin for a type specimen. It went unidentified for centuries until Latin scholar Richard McClintock traced the rare word 'consectetur' back to the original text. (Source: https://en.wikipedia.org/wiki/Lorem_ipsum)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 73,
+      "title": "Google's Minimal Homepage: Partly Because They Couldn't Do HTML",
+      "content": "Did you know? Sergey Brin admitted: 'We didn't have a webmaster and I don't do HTML.' Early Google was so sparse that users sat staring at the screen, waiting for the rest of the page to load. Google added a copyright notice at the bottom just so people would know the page was done. (Source: https://www.cio.com/article/252577/internet-google-s-founders-didn-t-know-html.html)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 74,
+      "title": "Comic Sans Was Inspired by Batman and Watchmen",
+      "content": "Did you know? Designer Vincent Connare created Comic Sans in 1994 after seeing Times New Roman in cartoon speech bubbles. He designed it using only a mouse, basing it on the comics on his desk: The Dark Knight Returns and Watchmen. He finished too late for its intended product and has personally used the font only once. (Source: https://www.howtogeek.com/707340/the-origin-of-comic-sans-why-do-so-many-people-hate-it/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 75,
+      "title": "The 'Ban Comic Sans' Movement Started at a Museum",
+      "content": "Did you know? In 1999, designers Dave and Holly Combs launched 'Ban Comic Sans' after their boss insisted they use it for a children's museum exhibit. The campaign went global. Creator Vincent Connare responded: 'People who don't like Comic Sans don't know anything about design.' (Source: https://www.dezeen.com/2014/11/27/vincent-connare-typography-interview-comic-sans-ms/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 76,
+      "title": "'Above the Fold' Comes From Newspapers",
+      "content": "Did you know? The term 'above the fold' comes from how newspapers were displayed on newsstands — folded in half, with only the top portion visible. Editors placed the best headlines there. When the web arrived, the term stuck: it now means the content visible before scrolling. (Source: https://en.wikipedia.org/wiki/Above_the_fold)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 77,
+      "title": "Dark Patterns Were Named by a UX Designer in 2010",
+      "content": "Did you know? Harry Brignull coined 'dark patterns' in 2010 for UI designs that trick users. Types include 'confirmshaming' (guilting users into clicking), 'roach motel' (easy to sign up, impossible to cancel), and 'sneak into basket.' The FTC sued Amazon partly for dark patterns in their Prime cancellation flow. (Source: https://www.deceptive.design/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 78,
+      "title": "Fitts's Law: Why Buttons Are Big (Math from 1954)",
+      "content": "Did you know? In 1954, psychologist Paul Fitts proved that time to reach a target depends on distance divided by size. This is why important buttons are large and near common click areas. Items at screen edges (like the macOS dock) are effectively infinite targets — the cursor can't overshoot. (Source: https://www.nngroup.com/articles/fitts-law/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 79,
+      "title": "94.8% of Websites Fail Basic Accessibility",
+      "content": "Did you know? WebAIM's 2025 analysis of the top 1,000,000 home pages found 94.8% had at least one accessibility failure, averaging 51 errors per page. The #1 issue? Low-contrast text, on 79.1% of pages. The same six error types have topped the list for five straight years. (Source: https://webaim.org/projects/million/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 80,
+      "title": "Blue Is the Web's Trust Color — Backed by Research",
+      "content": "Did you know? Color psychology research shows blue websites are rated as significantly more trustworthy than red or yellow ones. This isn't coincidence — Facebook, Twitter, LinkedIn, PayPal, and most banks use blue. Meanwhile, yellow can evoke distrust, and red triggers urgency (hence 'SALE' buttons). (Source: https://www.uxmatters.com/mt/archives/2023/12/color-psychology-in-visual-design-a-practical-guide-to-impacting-user-behavior.php)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 81,
+      "title": "Every Extra 10 Seconds of Load Time = 123% More Bounces",
+      "content": "Did you know? Research shows that every 10 extra seconds of page load time increases your bounce rate by 123%. Google found that 53% of mobile users abandon a site that takes longer than 3 seconds to load. Speed isn't just nice — it's survival. (Source: https://diviflash.com/website-statistics/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 82,
+      "title": "Ling's Cars: The 'Worst Website' That Makes Millions",
+      "content": "Did you know? Ling's Cars (a UK car leasing site) is famous for clashing colors, flashing banners, and general visual chaos. Despite (or because of) this, it generates millions in sales. Owner Ling Valentine deliberately weaponized bad design into viral marketing — proving that sometimes breaking every rule works. (Source: https://thewhitelabelagency.com/lings-cars-3-reasons-worst-website-internet-actually-genius/)",
+      "author": "Design & UX",
+      "author_email": "design@webfacts.dev"
+    },
+    {
+      "id": 83,
+      "title": "1.34 Billion Websites Exist, But Only 200 Million Are Active",
+      "content": "Did you know? The internet hosts 1.34 billion websites, but only about 15% (roughly 200 million) are actively maintained. About 252,000 new websites are created every single day. (Source: https://www.hostinger.com/tutorials/how-many-websites-are-there)",
+      "author": "Modern Web",
+      "author_email": "modern@webfacts.dev"
+    },
+    {
+      "id": 84,
+      "title": "npm Has Over 3 Million Packages",
+      "content": "Did you know? The npm registry has over 3.1 million packages — more than double the next-largest software registry. In a typical four-week period, users install approximately 18 billion packages. Every week, about 160 people publish their very first package. (Source: https://en.wikipedia.org/wiki/Npm)",
+      "author": "Modern Web",
+      "author_email": "modern@webfacts.dev"
+    },
+    {
+      "id": 85,
+      "title": "The is-odd Package Gets 500K Downloads Per Week",
+      "content": "Did you know? The npm package 'is-odd' (checks if a number is odd) gets 500,000+ weekly downloads. The 'is-even' package simply calls is-odd and negates it. There's even 'is-uneven' which negates is-even. The chain reaches into webpack, so you're probably using is-odd right now. (Source: https://dev.to/jyotishman/10-useless-npm-package-with-millions-of-downloads-de9)",
+      "author": "Modern Web",
+      "author_email": "modern@webfacts.dev"
+    },
+    {
+      "id": 86,
+      "title": "The npm Package 'true' Has 9 Contributors and 100% Test Coverage",
+      "content": "Did you know? The npm package 'true' contains three lines of code that return true. It has 9 contributors, 30 commits, and 100% test coverage. Its companion package 'false' returns the poop emoji. (Source: https://www.voidcanvas.com/npm-packages-you-wont-believe-exist)",
+      "author": "Modern Web",
+      "author_email": "modern@webfacts.dev"
+    },
+    {
+      "id": 87,
+      "title": "The Web Was Invented to Help Physicists Share Papers",
+      "content": "Did you know? Tim Berners-Lee didn't set out to create a global communication platform. He built the web to solve a mundane problem at CERN: physicists from different institutions used different computers and document formats, making it nearly impossible to share research papers. The web was a document-sharing tool that escaped the lab. (Source: https://home.cern/science/computing/birth-web)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 88,
+      "title": "Tim Berners-Lee's Boss Called His Proposal 'Vague but Exciting'",
+      "content": "Did you know? When Tim Berners-Lee submitted his proposal for the World Wide Web in March 1989, his boss Mike Sendall wrote 'Vague but exciting' on the cover page. This lukewarm endorsement was enough for Berners-Lee to begin working on it. The original proposal document is preserved at CERN. (Source: https://home.cern/science/computing/birth-web)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 89,
+      "title": "The Web Was Almost Called 'The Information Mine'",
+      "content": "Did you know? Before settling on 'World Wide Web,' Tim Berners-Lee considered naming it 'The Information Mine' (TIM — his initials), 'The Information Mesh,' and 'Mine of Information.' He chose 'World Wide Web' because it emphasized the decentralized nature of the system. (Source: https://en.wikipedia.org/wiki/World_Wide_Web)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 90,
+      "title": "The Early Web Had No Search Engines",
+      "content": "Did you know? For the first few years of the web, there were no search engines. You found websites by following hyperlinks from other websites, or by checking curated directories like Yahoo (1994), which was literally a hand-maintained list of interesting sites organized by category. (Source: https://en.wikipedia.org/wiki/Web_search_engine)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    },
+    {
+      "id": 91,
+      "title": "The 90s Web Had 'Under Construction' Signs Everywhere",
+      "content": "Did you know? In the 1990s, it was standard practice to put animated 'Under Construction' GIFs on unfinished web pages — complete with tiny hard-hat-wearing workers. Sites also featured hit counters, guestbooks, and auto-playing MIDI music. The 'Skip Intro' button for Flash animations was one of the most-clicked elements on the web. (Source: https://www.webdesignmuseum.org/web-design-history)",
+      "author": "Modern Web",
+      "author_email": "modern@webfacts.dev"
+    },
+    {
+      "id": 92,
+      "title": "The First Browser War Was Netscape vs. Internet Explorer",
+      "content": "Did you know? The first browser war (1995-2001) was between Netscape Navigator and Internet Explorer. Microsoft bundled IE free with Windows, which the DOJ considered anticompetitive. Netscape went from 90% market share to near-zero. Before dying, Netscape open-sourced its code — which eventually became Firefox. (Source: https://en.wikipedia.org/wiki/Browser_wars)",
+      "author": "Browser History",
+      "author_email": "browsers@webfacts.dev"
+    },
+    {
+      "id": 93,
+      "title": "Node.js Brought JavaScript to the Server in 2009",
+      "content": "Did you know? Before Node.js (2009), JavaScript only ran in browsers. Ryan Dahl built Node.js on Chrome's V8 engine, enabling JavaScript on the server side. For the first time, developers could use one language for both frontend and backend. This spawned the 'JavaScript everywhere' movement. (Source: https://en.wikipedia.org/wiki/Node.js)",
+      "author": "JavaScript History",
+      "author_email": "js@webfacts.dev"
+    },
+    {
+      "id": 94,
+      "title": "CSS Grid Was 20 Years in the Making",
+      "content": "Did you know? Web developers begged for a proper layout system for two decades. They used tables (1990s), floats (2000s), and flexbox (2012) as workarounds. CSS Grid finally shipped in major browsers in March 2017, giving developers a true two-dimensional layout system for the first time. (Source: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 95,
+      "title": "Flexbox Was Designed for Component Layout, Not Page Layout",
+      "content": "Did you know? Flexbox was designed for laying out items within a component (like a navigation bar or card). CSS Grid was designed for page-level layout. Many developers use flexbox for everything, but using the right tool for the right job makes CSS much simpler. (Source: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 96,
+      "title": "The z-index Goes Up to 2,147,483,647",
+      "content": "Did you know? The maximum z-index value in CSS is 2,147,483,647 (the max 32-bit signed integer). Developers have been known to use z-index: 99999 to 'make sure' something is on top. Some codebases have z-index wars where values escalate into the millions. (Source: https://developer.mozilla.org/en-US/docs/Web/CSS/z-index)",
+      "author": "CSS History",
+      "author_email": "css@webfacts.dev"
+    },
+    {
+      "id": 97,
+      "title": "Vite Means 'Fast' in French",
+      "content": "Did you know? Vite (the build tool used in this course) means 'fast' in French, pronounced /vit/. It was created by Evan You (who also created Vue.js) and replaced Create React App, which was officially sunset in February 2025. Vite is now the default build tool for React, Vue, Svelte, and more. (Source: https://vite.dev/guide/)",
+      "author": "Modern Web",
+      "author_email": "modern@webfacts.dev"
+    },
+    {
+      "id": 98,
+      "title": "Playwright Was Built by the Team That Made Puppeteer",
+      "content": "Did you know? Playwright was created at Microsoft by many of the same engineers who built Puppeteer at Google. They left Google, joined Microsoft, and started fresh with Playwright — adding cross-browser support (Chrome, Firefox, Safari) that Puppeteer lacked. It surpassed Cypress in downloads in 2024. (Source: https://en.wikipedia.org/wiki/Playwright_(software))",
+      "author": "Modern Web",
+      "author_email": "modern@webfacts.dev"
+    },
+    {
+      "id": 99,
+      "title": "JSON-Server Lets You Fake a REST API in 30 Seconds",
+      "content": "Did you know? JSON-Server (used in this homework) creates a full REST API from a single JSON file. It supports GET, POST, PUT, DELETE, filtering, pagination, and sorting — all with zero code. It was created by typicode and has been downloaded millions of times for prototyping and teaching. (Source: https://github.com/typicode/json-server)",
+      "author": "Modern Web",
+      "author_email": "modern@webfacts.dev"
+    },
+    {
+      "id": 100,
+      "title": "The Web Is Only 35 Years Old",
+      "content": "Did you know? Tim Berners-Lee submitted his original proposal for the World Wide Web on March 12, 1989 — just 37 years ago. In that time, it went from a physicist's document-sharing tool to a platform used by over 5 billion people, hosting 1.34 billion websites, and powering the global economy. (Source: https://home.cern/science/computing/birth-web)",
+      "author": "Web Protocols",
+      "author_email": "protocols@webfacts.dev"
+    }
+  ]
+}
