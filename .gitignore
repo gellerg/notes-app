@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# HW2 specific
+backend/.env
+backend/log.txt
+frontend/package-lock.json
+backend/package-lock.json
+package-lock.json
+frontend/data
+
+# Test outputs
+frontend/test-results
+frontend/playwright-report
+backend/coverage
