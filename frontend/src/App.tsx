@@ -2,25 +2,17 @@ import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import Pagination from './components/Pagination';
-
-type Note = {
-  _id: string;
-  title: string;
-  content: string;
-  author: {
-    name: string;
-    email: string;
-  } | null;
-};
-
+import type { Note } from './contexts/NotesTypes';
+import { useNotesContext } from './contexts/useNotesContext';
 const NOTES_URL = 'http://localhost:3001/notes';
 const POSTS_PER_PAGE = 10;
 
 function App() {
-  const [notes, setNotes] = useState<Note[]>([]);
+  const { state, dispatch } = useNotesContext();
+  const { notes, notification } = state;
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [notification, setNotification] = useState('Notification area');
 
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
   const [editedContent, setEditedContent] = useState('');
@@ -32,7 +24,7 @@ function App() {
     axios
       .get(`${NOTES_URL}?_page=${currentPage}&_per_page=${POSTS_PER_PAGE}`)
       .then((response) => {
-        setNotes(response.data);
+        dispatch({ type: 'SET_NOTES', payload: response.data });
 
         const totalCountHeader = response.headers['x-total-count'];
         const totalCount = totalCountHeader ? Number(totalCountHeader) : 0;
@@ -43,7 +35,7 @@ function App() {
       .catch((error) => {
         console.log('Encountered an error: ' + error);
       });
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
 
   useEffect(() => {
     fetchNotes();
@@ -53,7 +45,7 @@ function App() {
     axios
       .delete(`${NOTES_URL}/${id}`)
       .then(() => {
-        setNotification('Note deleted');
+        dispatch({ type: 'SET_NOTIFICATION', payload: 'Note deleted' });
         fetchNotes();
       })
       .catch((error) => {
@@ -79,7 +71,7 @@ function App() {
         content: editedContent,
       })
       .then(() => {
-        setNotification('Note updated');
+        dispatch({ type: 'SET_NOTIFICATION', payload: 'Note updated' });
         setEditingNoteId(null);
         setEditedContent('');
         fetchNotes();
@@ -114,7 +106,7 @@ function App() {
         content: newNoteContent,
       })
       .then(() => {
-        setNotification('Added a new note');
+        dispatch({ type: 'SET_NOTIFICATION', payload: 'Added a new note' });
         setIsAddingNote(false);
         setNewNoteContent('');
         setCurrentPage(1);

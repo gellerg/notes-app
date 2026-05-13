@@ -40,7 +40,7 @@ export const updateNoteById = async (
   }
 ) => {
   const updatedNote = await Note.findByIdAndUpdate(id, noteData, {
-    new: true,
+    returnDocument: 'after',
     runValidators: true,
   });
 
@@ -78,7 +78,7 @@ export const updateNoteByIndex = async (
   }
 
   const updatedNote = await Note.findByIdAndUpdate(note._id, noteData, {
-    new: true,
+    returnDocument: 'after',
     runValidators: true,
   });
 
