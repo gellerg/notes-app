@@ -29,17 +29,20 @@ const createNote = async (
 
   expect(response.ok()).toBeTruthy();
 
-  return response.json();
+  return (await response.json()) as CreatedNote;
 };
 
 test.describe('Notes CRUD flow', () => {
   test('reads notes from the page', async ({ page, request }) => {
-    await createNote(request, 'Read test note');
+    const note = await createNote(request, 'Read test note');
 
     await page.goto('/');
 
     await expect(page.getByRole('heading', { name: 'Fun Facts' })).toBeVisible();
-    await expect(page.getByText('Read test note')).toBeVisible();
+
+    const createdNote = page.getByTestId(note._id);
+    await expect(createdNote).toBeVisible();
+    await expect(createdNote).toContainText('Read test note');
     await expect(page.locator('.note').first()).toBeVisible();
   });
 
@@ -55,13 +58,19 @@ test.describe('Notes CRUD flow', () => {
     await page.locator('[name="text_input_save_new_note"]').click();
 
     await expect(page.locator('.notification')).toHaveText('Added a new note');
-    await expect(page.getByText('Playwright created note')).toBeVisible();
+
+    await expect(
+      page.locator('.note').filter({ hasText: 'Playwright created note' }).first()
+    ).toBeVisible();
   });
 
   test('updates a note', async ({ page, request }) => {
     const note = await createNote(request, 'Original note before update');
 
     await page.goto('/');
+
+    const noteElement = page.getByTestId(note._id);
+    await expect(noteElement).toBeVisible();
 
     await page.getByTestId(`edit-${note._id}`).click();
 
@@ -72,13 +81,18 @@ test.describe('Notes CRUD flow', () => {
     await page.getByTestId(`text_input_save-${note._id}`).click();
 
     await expect(page.locator('.notification')).toHaveText('Note updated');
-    await expect(page.getByText('Playwright updated note')).toBeVisible();
+
+    await expect(noteElement).toBeVisible();
+    await expect(noteElement).toContainText('Playwright updated note');
   });
 
   test('deletes a note', async ({ page, request }) => {
     const note = await createNote(request, 'Note to delete');
 
     await page.goto('/');
+
+    const noteElement = page.getByTestId(note._id);
+    await expect(noteElement).toBeVisible();
 
     await page.getByTestId(`delete-${note._id}`).click();
 
