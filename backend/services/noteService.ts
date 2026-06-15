@@ -1,5 +1,8 @@
 import { Note } from '../models/noteModel';
 
+const escapeForRegex = (value: string) =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 export const getNotes = async (page: number, perPage: number) => {
   const count = await Note.countDocuments();
 
@@ -18,6 +21,7 @@ export const createNote = async (noteData: {
     email: string;
   } | null;
   content: string;
+  user: string;
 }) => {
   const newNote = await Note.create(noteData);
   return newNote;
@@ -32,10 +36,6 @@ export const updateNoteById = async (
   id: string,
   noteData: {
     title?: string;
-    author?: {
-      name: string;
-      email: string;
-    } | null;
     content?: string;
   }
 ) => {
@@ -64,10 +64,6 @@ export const updateNoteByIndex = async (
   index: number,
   noteData: {
     title?: string;
-    author?: {
-      name: string;
-      email: string;
-    } | null;
     content?: string;
   }
 ) => {

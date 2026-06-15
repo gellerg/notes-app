@@ -30,6 +30,7 @@ frontend/package-lock.json
 backend/package-lock.json
 package-lock.json
 frontend/data
+data/
 
 # Test outputs
 frontend/test-results

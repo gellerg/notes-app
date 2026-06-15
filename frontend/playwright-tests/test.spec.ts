@@ -1,6 +1,23 @@
-import { test, expect, type APIRequestContext } from '@playwright/test';
+import { test, expect, type APIRequestContext, type Page } from '@playwright/test';
 
-const API_URL = 'http://localhost:3001/notes';
+const API_BASE_URL = 'http://localhost:3001';
+const NOTES_URL = `${API_BASE_URL}/notes`;
+
+type TestUser = {
+  name: string;
+  email: string;
+  username: string;
+  password: string;
+};
+
+type LoginResult = {
+  token: string;
+  user: {
+    name: string;
+    email: string;
+    username: string;
+  };
+};
 
 type CreatedNote = {
   _id: string;
@@ -12,17 +29,60 @@ type CreatedNote = {
   } | null;
 };
 
+const makeTestUser = (): TestUser => {
+  const uniqueValue = Date.now() + Math.floor(Math.random() * 100000);
+
+  return {
+    name: `Test User ${uniqueValue}`,
+    email: `test-${uniqueValue}@example.com`,
+    username: `testuser${uniqueValue}`,
+    password: 'password123',
+  };
+};
+
+const registerAndLogin = async (
+  request: APIRequestContext,
+  user = makeTestUser()
+): Promise<LoginResult> => {
+  const createUserResponse = await request.post(`${API_BASE_URL}/users`, {
+    data: user,
+  });
+
+  expect(createUserResponse.ok()).toBeTruthy();
+
+  const loginResponse = await request.post(`${API_BASE_URL}/login`, {
+    data: {
+      username: user.username,
+      password: user.password,
+    },
+  });
+
+  expect(loginResponse.ok()).toBeTruthy();
+
+  return (await loginResponse.json()) as LoginResult;
+};
+
+const loginInBrowser = async (page: Page, loginResult: LoginResult) => {
+  await page.addInitScript(
+    ({ token, user }) => {
+      localStorage.setItem('token', token);
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    },
+    loginResult
+  );
+};
+
 const createNote = async (
   request: APIRequestContext,
+  token: string,
   content = 'Seed note for test'
 ): Promise<CreatedNote> => {
-  const response = await request.post(API_URL, {
+  const response = await request.post(NOTES_URL, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
     data: {
       title: 'test note',
-      author: {
-        name: 'Test Author',
-        email: 'test@example.com',
-      },
       content,
     },
   });
@@ -32,9 +92,33 @@ const createNote = async (
   return (await response.json()) as CreatedNote;
 };
 
+const createUser = async (
+  request: APIRequestContext,
+  user = makeTestUser()
+): Promise<TestUser> => {
+  const response = await request.post(`${API_BASE_URL}/users`, {
+    data: user,
+  });
+
+  expect(response.ok()).toBeTruthy();
+
+  return user;
+};
+
+const loginThroughForm = async (page: Page, user: TestUser) => {
+  await page.goto('/login');
+
+  await page.getByTestId('login_form_username').fill(user.username);
+  await page.getByTestId('login_form_password').fill(user.password);
+  await page.getByTestId('login_form_login').click();
+
+  await expect(page.getByTestId('logout')).toBeVisible();
+};
+
 test.describe('Notes CRUD flow', () => {
   test('reads notes from the page', async ({ page, request }) => {
-    const note = await createNote(request, 'Read test note');
+    const loginResult = await registerAndLogin(request);
+    const note = await createNote(request, loginResult.token, 'Read test note');
 
     await page.goto('/');
 
@@ -46,16 +130,19 @@ test.describe('Notes CRUD flow', () => {
     await expect(page.locator('.note').first()).toBeVisible();
   });
 
-  test('creates a new note', async ({ page }) => {
+  test('creates a new note', async ({ page, request }) => {
+    const loginResult = await registerAndLogin(request);
+    await loginInBrowser(page, loginResult);
+
     await page.goto('/');
 
     await page.getByRole('button', { name: 'Add new note' }).click();
 
-    const newNoteInput = page.locator('[name="text_input_new_note"]');
+    const newNoteInput = page.getByTestId('text_input_new_note');
     await expect(newNoteInput).toBeVisible();
 
     await newNoteInput.fill('Playwright created note');
-    await page.locator('[name="text_input_save_new_note"]').click();
+    await page.getByTestId('text_input_save_new_note').click();
 
     await expect(page.locator('.notification')).toHaveText('Added a new note');
 
@@ -65,30 +152,40 @@ test.describe('Notes CRUD flow', () => {
   });
 
   test('updates a note', async ({ page, request }) => {
-    const note = await createNote(request, 'Original note before update');
+  test.setTimeout(15000);
 
-    await page.goto('/');
+  const loginResult = await registerAndLogin(request);
+  const note = await createNote(
+    request,
+    loginResult.token,
+    'Original note before update'
+  );
 
-    const noteElement = page.getByTestId(note._id);
-    await expect(noteElement).toBeVisible();
+  await loginInBrowser(page, loginResult);
+  await page.goto('/');
 
-    await page.getByTestId(`edit-${note._id}`).click();
+  const noteElement = page.getByTestId(note._id);
+  await expect(noteElement).toBeVisible();
 
-    const textarea = page.getByTestId(`text_input-${note._id}`);
-    await expect(textarea).toBeVisible();
+  await page.getByTestId(`edit-${note._id}`).click();
 
-    await textarea.fill('Playwright updated note');
-    await page.getByTestId(`text_input_save-${note._id}`).click();
+  const textarea = page.getByTestId(`text_input-${note._id}`);
+  await expect(textarea).toBeVisible();
 
-    await expect(page.locator('.notification')).toHaveText('Note updated');
+  await textarea.fill('Playwright updated note');
+  await page.getByTestId(`text_input_save-${note._id}`).click();
 
-    await expect(noteElement).toBeVisible();
-    await expect(noteElement).toContainText('Playwright updated note');
-  });
+  await expect(page.locator('.notification')).toHaveText('Note updated');
+
+  await expect(noteElement).toBeVisible();
+  await expect(noteElement).toContainText('Playwright updated note');
+});
 
   test('deletes a note', async ({ page, request }) => {
-    const note = await createNote(request, 'Note to delete');
+    const loginResult = await registerAndLogin(request);
+    const note = await createNote(request, loginResult.token, 'Note to delete');
 
+    await loginInBrowser(page, loginResult);
     await page.goto('/');
 
     const noteElement = page.getByTestId(note._id);
@@ -99,4 +196,27 @@ test.describe('Notes CRUD flow', () => {
     await expect(page.locator('.notification')).toHaveText('Note deleted');
     await expect(page.getByTestId(note._id)).toHaveCount(0);
   });
+
+  test('uses the AI helper to generate note text', async ({ page, request }) => {
+  test.setTimeout(30000);
+
+  const user = await createUser(request);
+  await loginThroughForm(page, user);
+
+  await page.getByTestId('add_new_note').click();
+
+  const newNoteInput = page.getByTestId('text_input_new_note');
+  await expect(newNoteInput).toBeVisible();
+  await expect(newNoteInput).toHaveValue('');
+
+  await page.getByTestId('help_me_write').click();
+
+  await page
+    .getByTestId('help_me_write_prompt')
+    .fill('Write a short fun fact based on my notes');
+
+  await page.getByTestId('help_me_write_submit').click();
+
+  await expect(newNoteInput).not.toHaveValue('', { timeout: 30000 });
+});
 });

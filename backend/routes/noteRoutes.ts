@@ -8,19 +8,23 @@ import {
   getNoteByIndex,
   updateNoteByIndex,
   deleteNoteByIndex,
+  filterNotesHandler,
 } from '../controllers/noteController';
+import { authMiddleware } from '../middlewares/authMiddleware';
 
 const router = express.Router();
 
+router.get('/filter', filterNotesHandler);
+
 router.get('/', getAllNotes);
-router.post('/', createNote);
+router.post('/', authMiddleware, createNote);
 
 router.get('/by-index/:i', getNoteByIndex);
-router.put('/by-index/:i', updateNoteByIndex);
-router.delete('/by-index/:i', deleteNoteByIndex);
+router.put('/by-index/:i', authMiddleware, updateNoteByIndex);
+router.delete('/by-index/:i', authMiddleware, deleteNoteByIndex);
 
 router.get('/:id', getNote);
-router.put('/:id', updateNote);
-router.delete('/:id', deleteNote);
+router.put('/:id', authMiddleware, updateNote);
+router.delete('/:id', authMiddleware, deleteNote);
 
 export default router;
