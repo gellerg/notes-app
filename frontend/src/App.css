@@ -626,6 +626,30 @@ h1 {
   box-shadow: 0 5px 12px rgba(120, 90, 100, 0.12);
 }
 
+/* Sanitizer toggle matches other page buttons */
+.sanitizer-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  margin: 0 8px 18px 0;
+  border: 1px solid #d8b6c4;
+  border-radius: 12px;
+  background-color: #f8e9ee;
+  color: #5f4b53;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(120, 90, 100, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.sanitizer-toggle:hover {
+  background-color: #f3dfe7;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(120, 90, 100, 0.12);
+}
+
 .add-note-area {
   width: 420px;
   max-width: 90%;

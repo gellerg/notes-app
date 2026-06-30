@@ -4,6 +4,7 @@ import Pagination from '../components/Pagination';
 import type { Note } from '../contexts/NotesTypes';
 import { useNotesContext } from '../contexts/useNotesContext';
 import { useAuth } from '../contexts/AuthContext';
+import { sanitizeHtml } from '../utils/sanitizeHtml';
 
 const NOTES_URL = '/notes';
 const POSTS_PER_PAGE = 10;
@@ -27,6 +28,7 @@ function Home() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [sanitizerEnabled, setSanitizerEnabled] = useState(true);
 
   const cacheRef = useRef<NotesCache>({});
   const inFlightRef = useRef<Map<number, Promise<void>>>(new Map());
@@ -321,6 +323,15 @@ function Home() {
 
       <div className="notification">{notification}</div>
 
+      <button
+        type="button"
+        className="sanitizer-toggle"
+        data-testid="sanitizer_toggle"
+        onClick={() => setSanitizerEnabled((currentValue) => !currentValue)}
+      >
+        Sanitizer: {sanitizerEnabled ? 'ON' : 'OFF'}
+      </button>
+
       {currentUser && (
         <button
           className="add-note-button"
@@ -392,6 +403,9 @@ function Home() {
       {notes.map((note) => {
         const isEditing = editingNoteId === note._id;
         const isAuthor = note.author?.email === currentUser?.email;
+        const noteBodyHtml = sanitizerEnabled
+          ? sanitizeHtml(note.content)
+          : note.content;
 
         return (
           <div key={note._id} className="note" data-testid={note._id}>
@@ -401,7 +415,10 @@ function Home() {
 
             <br />
 
-            {note.content}
+            <div
+              data-testid="note_body"
+              dangerouslySetInnerHTML={{ __html: noteBodyHtml }}
+            />
 
             <br />
 

